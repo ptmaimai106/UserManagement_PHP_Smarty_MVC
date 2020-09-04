@@ -15,7 +15,27 @@ class Users{
         return $result;
     }
 
-    // add, update, delete, getUser
+    public function addUser($name, $email, $phone, $city){
+        $queryAdd = "INSERT INTO `crud`( `name`, `email`,`phone`,`city`)VALUES ('$name','$email','$phone','$city')";
+        $this->db->query($queryAdd);
+
+    }
+
+    public function editUser($id,$name, $email, $phone, $city){
+        $queryEdit =  "UPDATE `crud` SET `name`='$name',`email`='$email',`phone`='$phone',`city`='$city' WHERE id=$id";
+        $this->db->query($queryEdit);
+    }
+
+    public function deleteUser($id){
+        $queryDelete = "DELETE FROM `crud` WHERE id=$id ";
+        $this->db->query($queryDelete);
+
+    }
+
+    public function deleteUsers($ids){
+        $queryDeletes = "DELETE FROM crud WHERE id in ($ids)";
+        $this->db->query($queryDeletes);
+    }
 
 
 }
