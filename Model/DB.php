@@ -10,9 +10,11 @@ class DB{
     public $dbname;
 
     private function __construct(){
-        $this->servername = 'mysql-server';
+//        $this->servername = 'mysql-server';
+        $this->servername = 'localhost';
         $this->username = 'root';
-        $this->password = 'secret';
+//        $this->password = 'secret';
+        $this->password = '';
         $this->dbname = 'app1';
 
 

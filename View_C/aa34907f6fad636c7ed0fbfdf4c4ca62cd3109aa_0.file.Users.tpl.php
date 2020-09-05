@@ -1,6 +1,47 @@
-{extends file="index.tpl"}
+<?php /* Smarty version 3.1.27, created on 2020-09-05 10:43:06
+         compiled from "C:\xampp\htdocs\users\View\Users.tpl" */ ?>
+<?php
+/*%%SmartyHeaderCode:12504202075f534f9a2acc12_94765139%%*/
+if(!defined('SMARTY_DIR')) exit('no direct access allowed');
+$_valid = $_smarty_tpl->decodeProperties(array (
+  'file_dependency' => 
+  array (
+    'aa34907f6fad636c7ed0fbfdf4c4ca62cd3109aa' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\users\\View\\Users.tpl',
+      1 => 1599294963,
+      2 => 'file',
+    ),
+    '3e1ca85dc05989e58eeb58db35910118584647e8' => 
+    array (
+      0 => 'C:\\xampp\\htdocs\\users\\View\\index.tpl',
+      1 => 1599278243,
+      2 => 'file',
+    ),
+    'da12cc64f084424446a99b48d9e8e7601b96cae0' => 
+    array (
+      0 => 'da12cc64f084424446a99b48d9e8e7601b96cae0',
+      1 => 0,
+      2 => 'string',
+    ),
+  ),
+  'nocache_hash' => '12504202075f534f9a2acc12_94765139',
+  'has_nocache_code' => false,
+  'version' => '3.1.27',
+  'unifunc' => 'content_5f534f9a305c54_42941426',
+),false);
+/*/%%SmartyHeaderCode%%*/
+if ($_valid && !is_callable('content_5f534f9a305c54_42941426')) {
+function content_5f534f9a305c54_42941426 ($_smarty_tpl) {
 
-{block name=body}
+$_smarty_tpl->properties['nocache_hash'] = '12504202075f534f9a2acc12_94765139';
+echo $_smarty_tpl->getSubTemplate ("header.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+?>
+
+<?php
+$_smarty_tpl->properties['nocache_hash'] = '12504202075f534f9a2acc12_94765139';
+?>
+
 <div class="container">
     <p id="success"></p>
     <div class="table-wrapper">
@@ -37,36 +78,54 @@
             </tr>
             </thead>
             <tbody>
-            {for $i=0 to sizeof($userList) -1}
-                <tr id="{$userList[$i]->id}">
+            <?php $_smarty_tpl->tpl_vars['i'] = new Smarty_Variable;$_smarty_tpl->tpl_vars['i']->step = 1;$_smarty_tpl->tpl_vars['i']->total = (int) ceil(($_smarty_tpl->tpl_vars['i']->step > 0 ? sizeof($_smarty_tpl->tpl_vars['userList']->value)-1+1 - (0) : 0-(sizeof($_smarty_tpl->tpl_vars['userList']->value)-1)+1)/abs($_smarty_tpl->tpl_vars['i']->step));
+if ($_smarty_tpl->tpl_vars['i']->total > 0) {
+for ($_smarty_tpl->tpl_vars['i']->value = 0, $_smarty_tpl->tpl_vars['i']->iteration = 1;$_smarty_tpl->tpl_vars['i']->iteration <= $_smarty_tpl->tpl_vars['i']->total;$_smarty_tpl->tpl_vars['i']->value += $_smarty_tpl->tpl_vars['i']->step, $_smarty_tpl->tpl_vars['i']->iteration++) {
+$_smarty_tpl->tpl_vars['i']->first = $_smarty_tpl->tpl_vars['i']->iteration == 1;$_smarty_tpl->tpl_vars['i']->last = $_smarty_tpl->tpl_vars['i']->iteration == $_smarty_tpl->tpl_vars['i']->total;?>
+                <tr id="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+">
                     <td>
                         <span class="custom-checkbox">
-                            <input type="checkbox" class="user_checkbox" data-user-id={$userList[$i]->id}">
+                            <input type="checkbox" class="user_checkbox" data-user-id=<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+">
                             <label for="checkbox2"></label>
                         </span>
                     </td>
-                    <td>{$i}</td>
-                    <td>{$userList[$i]->name}</td>
-                    <td>{$userList[$i]->email}</td>
-                    <td>{$userList[$i]->phone}</td>
-                    <td>{$userList[$i]->city}</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['i']->value;?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->name;?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->email;?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->phone;?>
+</td>
+                    <td><?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->city;?>
+</td>
                     <td>
-                        <a href="../Controller/UserController.php?act=edit&id={$userList[$i]->id}"  class="edit" data-toggle="modal">
+                        <a href="../Controller/UserController.php?act=edit&id=<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+"  class="edit" data-toggle="modal">
                             <i class="material-icons update"
                                data-toggle="tooltip"
-                               data-id="{$userList[$i]->id}"
-                               data-name="{$userList[$i]->name}"
-                               data-email="{$userList[$i]->email}"
-                               data-phone="{$userList[$i]->phone}"
-                               data-city="{$userList[$i]->city}"
+                               data-id="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+"
+                               data-name="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->name;?>
+"
+                               data-email="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->email;?>
+"
+                               data-phone="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->phone;?>
+"
+                               data-city="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->city;?>
+"
                                title="Edit">&#xE254;</i>
                         </a>
-                        <a href="../Controller/UserController.php?act=delete&id={$userList[$i]->id}" class="delete" data-id="{$userList[$i]->id}"
+                        <a href="../Controller/UserController.php?act=delete&id=<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+" class="delete" data-id="<?php echo $_smarty_tpl->tpl_vars['userList']->value[$_smarty_tpl->tpl_vars['i']->value]->id;?>
+"
                            data-toggle="modal"><i class="material-icons" data-toggle="tooltip"
                                                   title="Delete">&#xE872;</i></a>
                     </td>
                 </tr>
-            {/for}
+            <?php }} ?>
 
             </tbody>
         </table>
@@ -171,4 +230,9 @@
     </div>
 </div>
 
-{/block}
+
+<?php echo $_smarty_tpl->getSubTemplate ("footer.tpl", $_smarty_tpl->cache_id, $_smarty_tpl->compile_id, 0, $_smarty_tpl->cache_lifetime, array(), 0);
+
+}
+}
+?>
