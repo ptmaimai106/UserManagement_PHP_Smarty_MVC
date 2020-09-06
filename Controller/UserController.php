@@ -3,7 +3,6 @@
 include_once ("../Model/UserEntity.php");
 include_once ("../Model/UserModal.php");
 include_once ("../smarty/mySmarty.php");
-
 require_once('../smarty/Smarty.class.php');
 
 
@@ -13,12 +12,14 @@ class UserController{
     public $users;
     public $mySmarty;
     public $userList;
-    public $currId;
+    public $confirmDelete;
+
 
     public function __construct(){
         $this->users = new Users();
         $this->mySmarty = new mySmarty();
         $this->userList = array();
+        $this->confirmDelete = false;
     }
 
     public function invoke(){
@@ -29,55 +30,84 @@ class UserController{
                 array_push($this->userList, $user);
             }
             $this->mySmarty->assign('userList', $this->userList);
-            $this->mySmarty->display('../View/Users.tpl');
-        }
-    }
-
-    public function updateUser(){
-        if(count($_POST) >0){
-            $id = $_POST['$id'];
-            $name = $_POST['name'];
-            $email = $_POST['email'];
-            $phone = $_POST['phone'];
-            $city = $_POST['city'];
-            $type = $_POST['type'];
-
-            if($type == 1){
-                $this->users->addUser($name, $email, $phone, $city);
-            }
-            else if($type == 2){
-                $this->users->editUser($id, $name, $email,$phone,$city);
-            }
-            else if($type == 3){
-                $this->users->deleteUser($id);
-            }
-            else if($type == 4){
-                $this->users->deleteUsers($id);
-            }
+            $this->mySmarty->assign('confirmDelete', $this->confirmDelete);
+            $this->mySmarty->display('Users.tpl');
         }
     }
 
     public function mvcHandler(){
         if(isset($_POST['addRecord'])){
+            $this->addUser();
+        }
+        else if(isset($_POST['update-btn'])){
+            $this->editUser();
+        }
+        else {
+            $act = isset($_GET['act']) ? $_GET['act'] : null;
+
+            switch($act){
+                case 'edit':
+                    $this->getUser();
+                    break;
+                case 'delete':
+                    $this->deleteUser();
+                    break;
+                default:
+                    $this->invoke();
+            }
+        }
+    }
+
+    public function addUser(){
+        $name = $_POST['name'];
+        $email = $_POST['email'];
+        $phone = $_POST['phone'];
+        $city = $_POST['city'];
+        $result = $this->users->addUser($name, $email, $phone, $city);
+        if($result){
+            $this->invoke();
+        }else echo "Add failed";
+    }
+
+    public function getUser(){
+        $id = $_GET['id'];
+        if(isset($id)){
+            $userDetail = $this->users->getUser($id);
+            if (is_object($userDetail)){
+                $row = $userDetail->fetch_assoc();
+                $userInfo = new User($row['id'], $row['name'], $row['email'], $row['phone'], $row['city']);
+                $this->mySmarty->assign("userInfo", $userInfo);
+                $this->mySmarty->display('editUser.tpl');
+            }
+        }
+    }
+
+    public function editUser(){
+        if(isset($_POST['update-btn'])){
+            $id = $_POST['id'];
             $name = $_POST['name'];
             $email = $_POST['email'];
             $phone = $_POST['phone'];
             $city = $_POST['city'];
-            $this->users->addUser($name, $email, $phone, $city);
-            $this->invoke();
-        } else {
-            $act = isset($_GET['act']) ? $_GET['act'] : null;
-            switch($act){
-                case 'edit':
-                    echo $_GET["id"];
-                    break;
-                case 'delete':
-                    echo $_GET['id'];
-                    break;
-                default:
-                    echo 'Default';
+            $result= $this->users->editUser($id, $name, $email, $phone, $city);
+            if($result){
+                $this->invoke();
             }
-            $this->invoke();
+            else {
+                echo "Edit failed";
+            }
+        }
+    }
+
+    public function deleteUser(){
+        $id = $_GET['id'];
+        if(isset($id)){
+            $result = $this->users->deleteUser($id);
+            if($result){
+                $this->invoke();
+            }else {
+                echo "Delete failed";
+            }
         }
     }
 }

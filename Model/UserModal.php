@@ -1,5 +1,4 @@
 <?php
-
 include_once  "DB.php";
 
 class Users{
@@ -15,30 +14,27 @@ class Users{
         return $result;
     }
 
+    public function getUser($id){
+        $query = "SELECT * FROM crud WHERE id=$id";
+        $resultUser = $this->db->query($query);
+        return $resultUser;
+    }
+
     public function addUser($name, $email, $phone, $city){
         $queryAdd = "INSERT INTO `crud`( `name`, `email`,`phone`,`city`)VALUES ('$name','$email','$phone','$city')";
-        $this->db->query($queryAdd);
-        //return
-
+        $result = $this->db->query($queryAdd);
+        return $result;
     }
 
     public function editUser($id,$name, $email, $phone, $city){
         $queryEdit =  "UPDATE `crud` SET `name`='$name',`email`='$email',`phone`='$phone',`city`='$city' WHERE id=$id";
-        $this->db->query($queryEdit);
-        // return
+        $result = $this->db->query($queryEdit);
+        return $result;
     }
 
     public function deleteUser($id){
         $queryDelete = "DELETE FROM `crud` WHERE id=$id ";
-        $this->db->query($queryDelete);
-        // return
+        $result = $this->db->query($queryDelete);
+        return $result;
     }
-
-    public function deleteUsers($ids){
-        $queryDeletes = "DELETE FROM crud WHERE id in ($ids)";
-        $this->db->query($queryDeletes);
-        //return
-    }
-
-
 }
