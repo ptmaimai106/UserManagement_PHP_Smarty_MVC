@@ -12,7 +12,7 @@ class DB{
     private function __construct(){
         $this->servername = 'mysql-server';
         $this->username = 'root';
-        $this->password = '';
+        $this->password = 'secret';
         $this->dbname = 'app1';
 
 
